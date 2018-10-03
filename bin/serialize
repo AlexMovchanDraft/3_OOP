@@ -1,0 +1,37 @@
+#!/usr/bin/env php
+
+<?php
+
+$invoice = array (
+    "invoice"=> 34843,
+    "date"=> "2001-01-23",
+    "product"=> array(
+        array(
+            "sku"=> "BL394D",
+            "quantity"=> 4,
+            "description"=> "Basketball",
+            "price"=> 450,
+          ),
+        array(
+            "sku"=> "BL4438H",
+            "quantity"=> 1,
+            "description"=> "Super Hoop",
+            "price"=> 2392,
+          ),
+      ),
+    "tax"=> 251.42,
+    "total"=> 4443.52,
+    "comments"=> "Late afternoon is best. Backup contact is Nancy Billsmer @ 338-4338.",
+);
+
+require_once __DIR__ . '/../src/Serializer.php';
+require_once __DIR__ . '/../src/PersonData.php';
+
+$person = new PersonData('Alex', 'Movchan', 27);
+
+$serialize = new Serializer($person);
+
+// Serialize actions
+var_dump($serialize->serialize($person, 'json'));
+var_dump($serialize->serialize($invoice, 'yaml'));
+
